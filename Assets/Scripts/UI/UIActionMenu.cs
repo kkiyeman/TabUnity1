@@ -13,12 +13,17 @@ public class UIActionMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        btnBattle.onClick.AddListener(OnClickBattleStart);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void OnClickBattleStart()
+    {
+        ScenesManager.GetInstance().ChangeScene(Scene.Battle);
     }
 }
