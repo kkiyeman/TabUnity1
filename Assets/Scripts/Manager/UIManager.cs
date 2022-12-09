@@ -21,6 +21,10 @@ public class UIManager : MonoBehaviour
     }
     #endregion
     #region UIControl
+    public void Update()
+    {
+
+    }
 
     public void SetEventSystem()
     {
@@ -31,7 +35,7 @@ public class UIManager : MonoBehaviour
             go.AddComponent<StandaloneInputModule>();
         }
     }
-    Dictionary<string, GameObject> uiList = new Dictionary<string, GameObject> ();
+   Dictionary<string, GameObject> uiList = new Dictionary<string, GameObject> ();
 
     public void OpenUI(string uiName)
     {
@@ -55,6 +59,19 @@ public class UIManager : MonoBehaviour
             uiList[uiName].SetActive(false);
         }
         
+    }
+
+    public GameObject GetUI(string uiName)
+    {
+
+        if (uiList.ContainsKey(uiName))
+            return uiList[uiName];
+        return null;
+    }
+
+    public void ClearList()
+    {
+        uiList.Clear();
     }
     #endregion
 }

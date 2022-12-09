@@ -35,10 +35,11 @@ public class ScenesManager : MonoBehaviour
     
     public void ChangeScene(Scene scene)
     {
-       
+        UIManager.GetInstance().ClearList();
         prevScene = currentScene;
         currentScene = scene;
-        SceneManager.LoadScene(scene.ToString());      
+        SceneManager.LoadScene(scene.ToString());
+        
     }
 
     #endregion

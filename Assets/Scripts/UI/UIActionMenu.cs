@@ -14,6 +14,7 @@ public class UIActionMenu : MonoBehaviour
     void Start()
     {
         btnBattle.onClick.AddListener(OnClickBattleStart);
+        btnHeal.onClick.AddListener(OnClickHeal);
     }
 
     // Update is called once per frame
@@ -25,5 +26,18 @@ public class UIActionMenu : MonoBehaviour
     public void OnClickBattleStart()
     {
         ScenesManager.GetInstance().ChangeScene(Scene.Battle);
+    }
+
+    public void OnClickHeal()
+    {
+        GameManager.GetInstance().SetCurrentHP(50);
+        GameManager.GetInstance().SpendGold(50);
+        GameObject uiprofile = UIManager.GetInstance().GetUI("UIProfile");
+        uiprofile.GetComponent<UIProfile>().RefreshState();
+    }
+
+    public void OnCilckPractice()
+    {
+
     }
 }

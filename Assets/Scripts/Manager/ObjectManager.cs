@@ -23,7 +23,36 @@ public GameObject CreateCharacter()
     {
         Object charObj = Resources.Load("Sprite/Player");
         GameObject character = (GameObject)Instantiate(charObj);
+        
 
         return character;
+    }
+
+    public GameObject CreateMonster()
+    {
+        Object monsterObj = Resources.Load("Sprite/Monster1");
+        GameObject monster = (GameObject)Instantiate(monsterObj);
+
+
+        return monster;
+    }
+
+    public ParticleSystem CreateHitEffect()
+    {
+        Object Effect = Resources.Load("Effect/HitEffect_Green");
+        GameObject hEffect= (GameObject)Instantiate(Effect);
+      
+
+
+        return hEffect.GetComponent<ParticleSystem>();
+    }
+
+    public GameObject CreateDeadMonster()
+    {
+        Object monsterObj = Resources.Load("Sprite/DeadMonster1");
+        GameObject monster = (GameObject)Instantiate(monsterObj);
+
+
+        return monster;
     }
 }
