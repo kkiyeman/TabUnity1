@@ -34,6 +34,7 @@ public class UIActionMenu : MonoBehaviour
         GameManager.GetInstance().SpendGold(50);
         GameObject uiprofile = UIManager.GetInstance().GetUI("UIProfile");
         uiprofile.GetComponent<UIProfile>().RefreshState();
+        uiprofile.GetComponent<UIProfile>().HpbarColor(uiprofile.GetComponent<UIProfile>().hpBar, uiprofile.GetComponent<UIProfile>().imgFill);
     }
 
     public void OnCilckPractice()

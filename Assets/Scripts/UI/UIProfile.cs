@@ -27,15 +27,14 @@ public class UIProfile : MonoBehaviour
     {
 
         RefreshState();
+        HpbarColor(hpBar, imgFill);
+        HpbarColor(enemyHp, emgFill);
     }
 
     // Update is called once per frame
     void Update()
     {
-        hpBar.maxValue = GameManager.GetInstance().totalHp;
-        hpBar.value = GameManager.GetInstance().curHp;
-        enemyHp.maxValue = BattleManager.GetInstance().monsterData.hp;
-        enemyHp.value = BattleManager.GetInstance().monsterData.curhp;
+        RefreshState();
         HpbarColor(hpBar, imgFill);
         HpbarColor(enemyHp, emgFill);
 

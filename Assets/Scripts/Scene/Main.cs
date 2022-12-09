@@ -26,7 +26,6 @@ public class Main : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var uiprofile = UIManager.GetInstance().GetUI("UIProfile");
-        uiprofile.GetComponent<UIProfile>().HpbarColor(uiprofile.GetComponent<UIProfile>().hpBar, uiprofile.GetComponent<UIProfile>().imgFill);
+        
     }
 }
