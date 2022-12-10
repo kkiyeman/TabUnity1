@@ -30,15 +30,18 @@ public class UIActionMenu : MonoBehaviour
 
     public void OnClickHeal()
     {
-        GameManager.GetInstance().SetCurrentHP(50);
+        GameManager.GetInstance().SetCurrentHP(GameManager.GetInstance().totalHp/2);
         GameManager.GetInstance().SpendGold(50);
-        GameObject uiprofile = UIManager.GetInstance().GetUI("UIProfile");
-        uiprofile.GetComponent<UIProfile>().RefreshState();
-        uiprofile.GetComponent<UIProfile>().HpbarColor(uiprofile.GetComponent<UIProfile>().hpBar, uiprofile.GetComponent<UIProfile>().imgFill);
+        var hEffect = ObjectManager.GetInstance().CreateHitEffect("Health_Up_green");
+        hEffect.transform.localPosition = new Vector3(0, 1, 0);
+        hEffect.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
+        //var uiprofile = UIManager.GetInstance().GetUI("UIProfile");
+        // uiprofile.GetComponent<UIProfile>().RefreshState();
+        //uiprofile.GetComponent<UIProfile>().HpbarColor(uiprofile.GetComponent<UIProfile>().hpBar, uiprofile.GetComponent<UIProfile>().imgFill);
     }
 
     public void OnCilckPractice()
     {
-
+        ScenesManager.GetInstance().ChangeScene(Scene.Practice);
     }
 }

@@ -24,11 +24,33 @@ public class BattleManager : MonoBehaviour
     public Monster1 monsterData;
     GameObject monstersprite;
     GameObject uiTab;
-    
+    UIProfile uiprofile;
+
+    public Battle battlescene;
+
+
 
     public void Start()
     {
+        battlescene = FindObjectOfType<Battle>();
+        GameObject uiprofile = UIManager.GetInstance().GetUI("UIProfile");
+            if (uiprofile != null)
+                uiprofile.GetComponent<UIProfile>().RefreshState();
         
+    }
+
+    private void Update()
+    {
+
+        GameObject uiprofile = UIManager.GetInstance().GetUI("UIProfile");
+        if (uiprofile != null)
+        {
+            uiprofile.GetComponent<UIProfile>().enemyHp.maxValue = monsterData.hp;
+            uiprofile.GetComponent<UIProfile>().enemyHp.value = monsterData.curhp;
+        }
+
+
+
     }
 
     public void BattleStart(Monster1 monster,GameObject monster1shape)      
@@ -50,8 +72,10 @@ public class BattleManager : MonoBehaviour
 
             GameObject uiprofile = UIManager.GetInstance().GetUI("UIProfile");
             if (uiprofile != null)
+            {
                 uiprofile.GetComponent<UIProfile>().RefreshState();
-            
+            }
+
             Debug.Log($"몬스터가 플레이어에게 공격을 했습니다 - 데미지 : {damage} \n남은 체력 : {GameManager.GetInstance().curHp}");
 
         }
@@ -68,7 +92,7 @@ public class BattleManager : MonoBehaviour
     {
         float ranx = Random.Range(0, 2);
         float rany = Random.Range(1,2.5f);
-        var hEffect = ObjectManager.GetInstance().CreateHitEffect();
+        var hEffect = ObjectManager.GetInstance().CreateHitEffect("Hit_3_normal");
         hEffect.transform.localPosition = new Vector3(ranx, rany, 0);
         hEffect.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
 
@@ -94,8 +118,9 @@ public class BattleManager : MonoBehaviour
         uiprofile.GetComponent<UIProfile>().deadUi.gameObject.SetActive(true);
         uiprofile.GetComponent<UIProfile>().dead.text = $"승리~!";
         uiprofile.GetComponent<UIProfile>().dead.color = Color.green;
-
-
+        battlescene = FindObjectOfType<Battle>();
+        battlescene.audioplayer.clip = battlescene.victory;
+        battlescene.audioplayer.Play();
 
         GameManager.GetInstance().AddGold(monsterData.gold);
         StopCoroutine("Battle");
@@ -104,6 +129,9 @@ public class BattleManager : MonoBehaviour
 
     void Lose()
     {
+        battlescene = FindObjectOfType<Battle>();
+        battlescene.audioplayer.clip = battlescene.lose;
+        battlescene.audioplayer.Play();
         var uiprofile = UIManager.GetInstance().GetUI("UIProfile");
         uiprofile.GetComponent<UIProfile>().deadUi.gameObject.SetActive(true);
         uiprofile.GetComponent<UIProfile>().dead.text = $"패배!!";
@@ -113,7 +141,7 @@ public class BattleManager : MonoBehaviour
         GameManager.GetInstance().SetCurrentHP(100);
         GameManager.GetInstance().SpendGold(200);
 
-        Invoke("MoveToMain", 2);
+        Invoke("MoveToMain", 3);
 
     }
 

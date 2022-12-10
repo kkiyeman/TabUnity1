@@ -6,10 +6,14 @@ public class Battle : MonoBehaviour
 {
     GameObject monster1alive;
     public Monster1 enemy1;
+    public AudioSource audioplayer;
+    public AudioClip battle;
+    public AudioClip victory;
+    public AudioClip lose;
     // Start is called before the first frame update
     void Start()
     {
-
+        
         UIManager uimanager = UIManager.GetInstance();
         uimanager.SetEventSystem();
         uimanager.OpenUI("UIProfile");

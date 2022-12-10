@@ -49,22 +49,23 @@ public class UIProfile : MonoBehaviour
         
         hpBar.maxValue = GameManager.GetInstance().totalHp;
         hpBar.value = GameManager.GetInstance().curHp;
-        curHp.text = $"{hpBar.maxValue}/{hpBar.value}";
-        HpbarColor(hpBar, imgFill);
-        HpbarColor(enemyHp, emgFill);
+
+        curHp.text = $"{hpBar.value}/{hpBar.maxValue}";
+        
+        
     }
 
     public void HpbarColor(Slider slider,Image image)
     {
-        if(slider.value<slider.maxValue && slider.value>= slider.maxValue * 2 / 3)
+        if(slider.value> slider.maxValue * 2 / 3)
         {
             image.color = Color.green;
         }
-        else if (slider.maxValue / 3 < slider.value &&  slider.value < slider.maxValue*2/3)
+        else if (slider.maxValue / 3 < slider.value &&  slider.value <= slider.maxValue*2/3)
         {
             image.color = new Color32(236, 139, 34, 255);       
         }
-        else if (0 < slider.value && slider.value <= slider.maxValue / 3)
+        else if (slider.value <= slider.maxValue / 3)
         {
             image.color = Color.red;
         }

@@ -37,9 +37,9 @@ public GameObject CreateCharacter()
         return monster;
     }
 
-    public ParticleSystem CreateHitEffect()
+    public ParticleSystem CreateHitEffect(string hiteffect)
     {
-        Object Effect = Resources.Load("Effect/HitEffect_Green");
+        Object Effect = Resources.Load($"Effect/{hiteffect}");
         GameObject hEffect= (GameObject)Instantiate(Effect);
       
 
