@@ -67,8 +67,9 @@ public class BattleManager : MonoBehaviour
         {
             yield return new WaitForSeconds(monsterData.delay);
 
-            int damage = monsterData.atk;      
-            GameManager.GetInstance().SetCurrentHP(-damage);
+            int damage = monsterData.atk;
+            int def = GameManager.GetInstance().def;
+            GameManager.GetInstance().SetCurrentHP(-damage+def);
 
             GameObject uiprofile = UIManager.GetInstance().GetUI("UIProfile");
             if (uiprofile != null)

@@ -15,6 +15,9 @@ public class Practice : MonoBehaviour
         UIManager profile = UIManager.GetInstance();
         profile.SetEventSystem();
         profile.OpenUI("UIProfile");
+
+        UIManager practice = UIManager.GetInstance();
+        practice.OpenUI("UIPractice");
     }
 
     // Update is called once per frame

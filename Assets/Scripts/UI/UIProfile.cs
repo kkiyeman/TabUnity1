@@ -19,7 +19,7 @@ public class UIProfile : MonoBehaviour
     public TMP_Text txtGold;
 
     public TMP_Text curHp;
-    public TMP_Text log;
+    public Text log;
 
     public TMP_Text dead;
     // Start is called before the first frame update
@@ -42,15 +42,17 @@ public class UIProfile : MonoBehaviour
 
     public void RefreshState()
     {
-        txtLevel.text = $"Lv : {GameManager.GetInstance().level}";
-        txtName.text = $"{GameManager.GetInstance().playerName}";
-        txtGold.text = $"{GameManager.GetInstance().gold} G";
+        var instance = GameManager.GetInstance();
+        txtLevel.text = $"Lv : {instance.level}";
+        txtName.text = $"{instance.playerName}";
+        txtGold.text = $"{instance.gold} G";
 
         
-        hpBar.maxValue = GameManager.GetInstance().totalHp;
-        hpBar.value = GameManager.GetInstance().curHp;
+        hpBar.maxValue = instance.totalHp;
+        hpBar.value = instance.curHp;
 
         curHp.text = $"{hpBar.value}/{hpBar.maxValue}";
+        log.text = $"Atk : {instance.atk}\nDef : {instance.def}";
         
         
     }

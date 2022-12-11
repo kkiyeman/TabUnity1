@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public int totalHp = 100;
     public int curHp = 100;
     public int atk = 5;
+    public int def = 0;
 
 
     public void AddGold(int gold)
@@ -45,6 +46,21 @@ public class GameManager : MonoBehaviour
     public void IncreaseTotalHP(int addHp)
     {
         totalHp += addHp;
+    }
+
+    public void IncreaseCurHp(int addHp)
+    {
+        curHp += addHp;
+    }
+
+    public void IncreaseAtk(int addatk)
+    {
+        atk += addatk;
+    }
+
+    public void IncreaseDef(int adddef)
+    {
+        def += adddef;
     }
 
     public void SetCurrentHP(int hp)
