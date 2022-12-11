@@ -27,7 +27,7 @@ public class Battle : MonoBehaviour
         ObjectManager monster = ObjectManager.GetInstance();
         GameObject monster1 = monster.CreateMonster();
         monster1.transform.localScale = new Vector2(3, 3);
-        monster1.transform.position = new Vector3(0, 1, 0);
+        monster1.transform.position = new Vector3(0, -1, 0);
         
 
 

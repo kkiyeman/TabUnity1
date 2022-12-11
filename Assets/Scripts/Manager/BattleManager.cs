@@ -91,7 +91,7 @@ public class BattleManager : MonoBehaviour
     public void AttackMonster()
     {
         float ranx = Random.Range(0, 2);
-        float rany = Random.Range(1,2.5f);
+        float rany = Random.Range(-1,0.5f);
         var hEffect = ObjectManager.GetInstance().CreateHitEffect("Hit_3_normal");
         hEffect.transform.localPosition = new Vector3(ranx, rany, 0);
         hEffect.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
@@ -111,7 +111,7 @@ public class BattleManager : MonoBehaviour
         ObjectManager monster = ObjectManager.GetInstance();
         var monster1 = monster.CreateDeadMonster();
         monster1.transform.localScale = new Vector2(3, 3);
-        monster1.transform.position = new Vector3(0, 1, 0);
+        monster1.transform.position = new Vector3(0, -1, 0);
        
 
         var uiprofile = UIManager.GetInstance().GetUI("UIProfile");
