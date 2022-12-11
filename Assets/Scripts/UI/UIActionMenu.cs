@@ -15,6 +15,7 @@ public class UIActionMenu : MonoBehaviour
     {
         btnBattle.onClick.AddListener(OnClickBattleStart);
         btnHeal.onClick.AddListener(OnClickHeal);
+        btnPractice.onClick.AddListener(OnCilckPractice);
     }
 
     // Update is called once per frame
