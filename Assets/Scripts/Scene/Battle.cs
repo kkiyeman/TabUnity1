@@ -33,6 +33,8 @@ public class Battle : MonoBehaviour
         effectpool.Initialize(20);
 
 
+        UIManager transition = UIManager.GetInstance();
+        transition.OpenUI("UITransition");
 
         battlemanager.BattleStart(new Monster1(),monster1);
     }

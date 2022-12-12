@@ -27,7 +27,10 @@ public class UIPractice : MonoBehaviour
 
     public void OnClickBack()
     {
-        ScenesManager.GetInstance().ChangeScene(Scene.Main);
+        var transition = UIManager.GetInstance().GetUI("UITransition");
+        transition.GetComponent<UITransition>().FadeOutt();
+        Invoke("MainSceneLoad", 1.4f);
+        
     }
     public void OnClickAtkUp()
     {
@@ -94,6 +97,11 @@ public class UIPractice : MonoBehaviour
     void TextReset()
     {
         log.text = $"무엇을 하시겠습니까?";
+    }
+
+    void MainSceneLoad()
+    {
+        ScenesManager.GetInstance().ChangeScene(Scene.Main);
     }
 
 }

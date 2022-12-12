@@ -18,6 +18,9 @@ public class Practice : MonoBehaviour
 
         UIManager practice = UIManager.GetInstance();
         practice.OpenUI("UIPractice");
+
+        UIManager transition = UIManager.GetInstance();
+        transition.OpenUI("UITransition");
     }
 
     // Update is called once per frame

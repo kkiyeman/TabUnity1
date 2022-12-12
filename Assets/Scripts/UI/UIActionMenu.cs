@@ -17,6 +17,7 @@ public class UIActionMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         anotherText = false;
         audiosource = GetComponent<AudioSource>();
         btnBattle.onClick.AddListener(OnClickBattleStart);
@@ -33,7 +34,10 @@ public class UIActionMenu : MonoBehaviour
 
     public void OnClickBattleStart()
     {
-        ScenesManager.GetInstance().ChangeScene(Scene.Battle);
+        MarchPlayer();
+        var transition = UIManager.GetInstance().GetUI("UITransition");
+        transition.GetComponent<UITransition>().FadeOutt();
+        Invoke("SceneBattleLoad", 1.4f);
     }
 
     public void OnClickHeal()
@@ -52,16 +56,26 @@ public class UIActionMenu : MonoBehaviour
 
 
         }
-        //var uiprofile = UIManager.GetInstance().GetUI("UIProfile");
-        // uiprofile.GetComponent<UIProfile>().RefreshState();
-        //uiprofile.GetComponent<UIProfile>().HpbarColor(uiprofile.GetComponent<UIProfile>().hpBar, uiprofile.GetComponent<UIProfile>().imgFill);
+      
     }
 
     public void OnCilckPractice()
     {
-        ScenesManager.GetInstance().ChangeScene(Scene.Practice);
+        MarchPlayer();
+        var transition = UIManager.GetInstance().GetUI("UITransition");
+        transition.GetComponent<UITransition>().FadeOutt();
+        Invoke("ScenePracticeLoad", 1.4f);
     }
 
+    private void ScenePracticeLoad()
+    {
+        ScenesManager.GetInstance().ChangeScene(Scene.Practice);
+    }
+    private void SceneBattleLoad()
+    {
+
+        ScenesManager.GetInstance().ChangeScene(Scene.Battle);
+    }
     private void Heal()
     {
         GameManager.GetInstance().SetCurrentHP(GameManager.GetInstance().totalHp / 2);
@@ -90,9 +104,15 @@ public class UIActionMenu : MonoBehaviour
 
     private void DefaultText()
     {
+        
         anotherText = false;
         StartCoroutine(Waiting());
     }
 
-
+    public void MarchPlayer()
+    {
+        var player = GameObject.Find("Player(Clone)").GetComponent<MoveManager>();
+        player.March();
+        
+    }
 }
