@@ -79,14 +79,14 @@ public class UIPractice : MonoBehaviour
             audiosource.clip = coin;
             audiosource.Play();
             log.text = $"수련성공! Hp+30";
-            Invoke("TextReset", 2);
+            Invoke("TextReset", 1);
         }
         else
         {
             audiosource.clip = beep;
             audiosource.Play();
             log.text = $"돈이 부족합니다!";
-            Invoke("TextReset", 2);
+            Invoke("TextReset", 1);
         }
             
     }

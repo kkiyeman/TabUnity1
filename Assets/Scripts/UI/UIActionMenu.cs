@@ -31,11 +31,14 @@ public class UIActionMenu : MonoBehaviour
 
     public void OnClickHeal()
     {
-        GameManager.GetInstance().SetCurrentHP(GameManager.GetInstance().totalHp/2);
-        GameManager.GetInstance().SpendGold(50);
-        var hEffect = ObjectManager.GetInstance().CreateHitEffect("Health_Up_green");
-        hEffect.transform.localPosition = new Vector3(0, 1, 0);
-        hEffect.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
+        if(GameManager.GetInstance().totalHp >GameManager.GetInstance().curHp)
+        {
+            Heal();
+        }
+        else
+        {
+            return;
+        }
         //var uiprofile = UIManager.GetInstance().GetUI("UIProfile");
         // uiprofile.GetComponent<UIProfile>().RefreshState();
         //uiprofile.GetComponent<UIProfile>().HpbarColor(uiprofile.GetComponent<UIProfile>().hpBar, uiprofile.GetComponent<UIProfile>().imgFill);
@@ -44,5 +47,14 @@ public class UIActionMenu : MonoBehaviour
     public void OnCilckPractice()
     {
         ScenesManager.GetInstance().ChangeScene(Scene.Practice);
+    }
+
+    private void Heal()
+    {
+        GameManager.GetInstance().SetCurrentHP(GameManager.GetInstance().totalHp / 2);
+        GameManager.GetInstance().SpendGold(50);
+        var hEffect = ObjectManager.GetInstance().CreateHitEffect("Health_Up_green");
+        hEffect.transform.localPosition = new Vector3(0, 1, 0);
+        hEffect.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
     }
 }
