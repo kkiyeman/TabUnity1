@@ -19,6 +19,8 @@ public class Main : MonoBehaviour
 
         UIManager action = UIManager.GetInstance();
         action.OpenUI("UIActionMenu");
+
+
         
     }
 

@@ -93,9 +93,9 @@ public class BattleManager : MonoBehaviour
     {
         float ranx = Random.Range(0, 2);
         float rany = Random.Range(-1,0.5f);
-        var hEffect = ObjectManager.GetInstance().CreateHitEffect("Hit_3_normal");
+        var hEffect = EffectPool.GetObject();
         hEffect.transform.localPosition = new Vector3(ranx, rany, 0);
-        hEffect.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
+        hEffect.Return();
 
         monsterData.curhp -= GameManager.GetInstance().atk;
         if(monsterData.curhp<=0)

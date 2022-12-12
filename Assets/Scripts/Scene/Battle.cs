@@ -28,7 +28,10 @@ public class Battle : MonoBehaviour
         GameObject monster1 = monster.CreateMonster();
         monster1.transform.localScale = new Vector2(3, 3);
         monster1.transform.position = new Vector3(0, -1, 0);
-        
+
+        EffectPool effectpool = EffectPool.GetInstance();
+        effectpool.Initialize(20);
+
 
 
         battlemanager.BattleStart(new Monster1(),monster1);
