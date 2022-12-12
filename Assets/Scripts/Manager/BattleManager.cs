@@ -116,9 +116,8 @@ public class BattleManager : MonoBehaviour
        
 
         var uiprofile = UIManager.GetInstance().GetUI("UIProfile");
-        uiprofile.GetComponent<UIProfile>().deadUi.gameObject.SetActive(true);
-        uiprofile.GetComponent<UIProfile>().dead.text = $"½Â¸®~!";
-        uiprofile.GetComponent<UIProfile>().dead.color = Color.green;
+        uiprofile.GetComponent<UIProfile>().deadUi.sprite = uiprofile.GetComponent<UIProfile>().victory;     
+        uiprofile.GetComponent<UIProfile>().animator.SetTrigger("trigger");
         battlescene = FindObjectOfType<Battle>();
         battlescene.audioplayer.clip = battlescene.victory;
         battlescene.audioplayer.Play();
@@ -134,8 +133,8 @@ public class BattleManager : MonoBehaviour
         battlescene.audioplayer.clip = battlescene.lose;
         battlescene.audioplayer.Play();
         var uiprofile = UIManager.GetInstance().GetUI("UIProfile");
-        uiprofile.GetComponent<UIProfile>().deadUi.gameObject.SetActive(true);
-        uiprofile.GetComponent<UIProfile>().dead.text = $"ÆÐ¹è!!";
+        uiprofile.GetComponent<UIProfile>().deadUi.sprite = uiprofile.GetComponent<UIProfile>().defeat;
+        uiprofile.GetComponent<UIProfile>().animator.SetTrigger("trigger");
         UIManager.GetInstance().CloseUI("UITab");
         StopCoroutine("Battle");
 

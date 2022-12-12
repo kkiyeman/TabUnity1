@@ -21,7 +21,12 @@ public class UIProfile : MonoBehaviour
     public TMP_Text curHp;
     public Text log;
 
-    public TMP_Text dead;
+    
+
+    public Sprite victory;
+    public Sprite defeat;
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
