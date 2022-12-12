@@ -10,12 +10,19 @@ public class UIActionMenu : MonoBehaviour
     public Button btnPractice;
     public Button btnHeal;
     public Button btnBattle;
+    public Text log;
+
+    public bool anotherText = false;
+    public AudioSource audiosource;
     // Start is called before the first frame update
     void Start()
     {
+        anotherText = false;
+        audiosource = GetComponent<AudioSource>();
         btnBattle.onClick.AddListener(OnClickBattleStart);
         btnHeal.onClick.AddListener(OnClickHeal);
         btnPractice.onClick.AddListener(OnCilckPractice);
+        StartCoroutine(Waiting());
     }
 
     // Update is called once per frame
@@ -37,7 +44,13 @@ public class UIActionMenu : MonoBehaviour
         }
         else
         {
-            return;
+            StopAllCoroutines();
+            audiosource.Play();
+            anotherText = true;
+            log.text = "HP가 가득입니다!";
+            Invoke("DefaultText", 2.1f);
+
+
         }
         //var uiprofile = UIManager.GetInstance().GetUI("UIProfile");
         // uiprofile.GetComponent<UIProfile>().RefreshState();
@@ -57,4 +70,29 @@ public class UIActionMenu : MonoBehaviour
         hEffect.transform.localPosition = new Vector3(0, 1, 0);
         hEffect.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
     }
+
+    public IEnumerator Waiting()
+    {
+        while (!anotherText)
+        {
+            log.text = "용사 대기중";
+            yield return new WaitForSeconds(0.5f);
+            log.text = "용사 대기중.";
+            yield return new WaitForSeconds(0.5f);
+            log.text = "용사 대기중..";
+            yield return new WaitForSeconds(0.5f);
+            log.text = "용사 대기중...";
+            yield return new WaitForSeconds(0.5f);
+        }
+        
+         
+    }
+
+    private void DefaultText()
+    {
+        anotherText = false;
+        StartCoroutine(Waiting());
+    }
+
+
 }
