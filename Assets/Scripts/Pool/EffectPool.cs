@@ -8,7 +8,7 @@ public class EffectPool : MonoBehaviour
    
     public GameObject hitEffect;
 
-    public Queue<HitEffect> effectPool = new Queue<HitEffect>();
+    public Queue<HitEffect> effectPool = new Queue<HitEffect>(); 
     public static EffectPool GetInstance()
     {
         if (instance == null)

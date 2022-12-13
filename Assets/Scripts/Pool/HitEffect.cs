@@ -7,6 +7,7 @@ public class HitEffect : MonoBehaviour
 
     public void Return()
     {
+        
         Invoke("Disappear", 1);
     }
     public void Disappear()
