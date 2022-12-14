@@ -27,9 +27,33 @@ public class GameManager : MonoBehaviour
     public int def = 0;
 
 
+    public void SaveData()
+    {
+        PlayerPrefs.SetString("playerName", playerName);
+        PlayerPrefs.SetInt("level", level);
+        PlayerPrefs.SetInt("gold", gold);
+        PlayerPrefs.SetInt("totalHp", totalHp);
+        PlayerPrefs.SetInt("curHp", curHp);
+        PlayerPrefs.SetInt("atk", atk);
+        PlayerPrefs.SetInt("def", def);
+    }
+
+    public void LoadData()
+    {
+        playerName = PlayerPrefs.GetString("playerName", "Kkiyeman");
+        level = PlayerPrefs.GetInt("level", 05);
+        gold =  PlayerPrefs.GetInt("gold", 1000);
+        totalHp = PlayerPrefs.GetInt("totalHp", 100);
+        curHp = PlayerPrefs.GetInt("curHp", 100);
+        atk = PlayerPrefs.GetInt("atk", 5);
+        def = PlayerPrefs.GetInt("def", 0);
+    }
+
+
     public void AddGold(int gold)
     {
         this.gold += gold;
+        SaveData();
     }
 
     public bool SpendGold(int gold)
@@ -37,30 +61,35 @@ public class GameManager : MonoBehaviour
         if (this.gold >= gold)
         {
             this.gold -= gold;
+            SaveData();
             return true;
         }
-
+        
         return false;
     }
 
     public void IncreaseTotalHP(int addHp)
     {
         totalHp += addHp;
+        SaveData();
     }
 
     public void IncreaseCurHp(int addHp)
     {
         curHp += addHp;
+        SaveData();
     }
 
     public void IncreaseAtk(int addatk)
     {
         atk += addatk;
+        SaveData();
     }
 
     public void IncreaseDef(int adddef)
     {
         def += adddef;
+        SaveData();
     }
 
     public void SetCurrentHP(int hp)
@@ -72,7 +101,7 @@ public class GameManager : MonoBehaviour
 
         if (curHp < 0)
             curHp = 0;
-
+        SaveData();
         //curHp = Mathf.Clamp(curHp, 0, 100);   <= 위 기능들을 한번에 묶어버리는 유니티 전용 함수.
     }
 

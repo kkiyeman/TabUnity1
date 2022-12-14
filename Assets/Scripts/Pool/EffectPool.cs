@@ -18,11 +18,6 @@ public class EffectPool : MonoBehaviour
         }
         return instance;
     }
-    // Start is called before the first frame update
-    void Awake()
-    {
-        
-    }
 
     public void Initialize(int initCount)
     {

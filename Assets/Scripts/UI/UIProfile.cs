@@ -58,8 +58,8 @@ public class UIProfile : MonoBehaviour
 
         curHp.text = $"{hpBar.value}/{hpBar.maxValue}";
         log.text = $"Atk : {instance.atk}\nDef : {instance.def}";
-        
-        
+        instance.SaveData();
+               
     }
 
     public void HpbarColor(Slider slider,Image image)

@@ -21,10 +21,7 @@ public class UIManager : MonoBehaviour
     }
     #endregion
     #region UIControl
-    public void Update()
-    {
 
-    }
 
     public void SetEventSystem()
     {

@@ -7,6 +7,7 @@ public class Main : MonoBehaviour
     GameObject cprofile;
     void Start()
     {
+        
         ObjectManager player = ObjectManager.GetInstance();
         GameObject mp = player.CreateCharacter();
         mp.transform.localScale = new Vector2(1.3f, 1.3f);
@@ -22,6 +23,8 @@ public class Main : MonoBehaviour
 
         UIManager transition = UIManager.GetInstance();
         transition.OpenUI("UITransition");
+
+        
         
     }
 
