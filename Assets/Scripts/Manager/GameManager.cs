@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum Player
+{
+    Player1 = 0,
+    Player2 = 1
+}
+
 public class GameManager : MonoBehaviour
 {
     #region Singletone
@@ -18,50 +25,75 @@ public class GameManager : MonoBehaviour
         return instance;
     }
     #endregion
-    public string playerName = "Kkiyeman";
-    public int level = 05;
-    public int gold = 1000;
-    public int totalHp = 100;
-    public int curHp = 100;
-    public int atk = 5;
-    public int def = 0;
+   
+    public Player1 playingPlayer;
+    public Player selectedPlayer;
 
+    Dictionary<Player, Player1> playerList = new Dictionary<Player, Player1>();
 
-    public void SaveData()
+    public void InitPlayer()
     {
-        PlayerPrefs.SetString("playerName", playerName);
-        PlayerPrefs.SetInt("level", level);
-        PlayerPrefs.SetInt("gold", gold);
-        PlayerPrefs.SetInt("totalHp", totalHp);
-        PlayerPrefs.SetInt("curHp", curHp);
-        PlayerPrefs.SetInt("atk", atk);
-        PlayerPrefs.SetInt("def", def);
+        if (playerList.Count == 0)
+        {
+            playerList.Add(Player.Player1, new Player1("Warrior", 05, 100, 100, 5, 1, 1000));
+            playerList.Add(Player.Player2, new Player1("Mage", 05, 80, 80, 8, 0, 1200));
+        }
+        return;
     }
 
-    public void LoadData()
+    private void Awake()
     {
-        playerName = PlayerPrefs.GetString("playerName", "Kkiyeman");
-        level = PlayerPrefs.GetInt("level", 05);
-        gold =  PlayerPrefs.GetInt("gold", 1000);
-        totalHp = PlayerPrefs.GetInt("totalHp", 100);
-        curHp = PlayerPrefs.GetInt("curHp", 100);
-        atk = PlayerPrefs.GetInt("atk", 5);
-        def = PlayerPrefs.GetInt("def", 0);
+        InitPlayer();
+    }
+
+
+
+    public void SetPlayer()
+    {
+        InitPlayer();
+        Player1 player = playerList[ObjectManager.GetInstance().playerInfo];
+        playingPlayer = player;
+    }
+    public void SaveData(Player player)
+    {     
+        player = selectedPlayer;
+        int sP = (int)player;
+        PlayerPrefs.SetString($"playerName_{sP}", playingPlayer.playerName);
+        PlayerPrefs.SetInt($"level_{sP}", playingPlayer.level);
+        PlayerPrefs.SetInt($"gold_{sP}", playingPlayer.gold);
+        PlayerPrefs.SetInt($"totalHp_{sP}", playingPlayer.totalHp);
+        PlayerPrefs.SetInt($"curHp_{sP}", playingPlayer.curHp);
+        PlayerPrefs.SetInt($"atk_{sP}", playingPlayer.atk);
+        PlayerPrefs.SetInt($"def_{sP}", playingPlayer.def);
+    }
+
+    public void LoadData(Player player)
+    {
+        InitPlayer();
+        player = selectedPlayer;
+        int sP = (int)player;
+        playingPlayer.playerName = PlayerPrefs.GetString($"playerName_{sP}", playerList[player].playerName);
+        playingPlayer.level = PlayerPrefs.GetInt($"level_{sP}", playerList[player].level);
+        playingPlayer.gold =  PlayerPrefs.GetInt($"gold_{sP}", playerList[player].gold);
+        playingPlayer.totalHp = PlayerPrefs.GetInt($"totalHp_{sP}", playerList[player].totalHp);
+        playingPlayer.curHp = PlayerPrefs.GetInt($"curHp_{sP}", playerList[player].curHp);
+        playingPlayer.atk = PlayerPrefs.GetInt($"atk_{sP}", playerList[player].atk);
+        playingPlayer.def = PlayerPrefs.GetInt($"def_{sP}", playerList[player].def);
     }
 
 
     public void AddGold(int gold)
     {
-        this.gold += gold;
-        SaveData();
+        playingPlayer.gold += gold;
+        SaveData(selectedPlayer);
     }
 
     public bool SpendGold(int gold)
     {
-        if (this.gold >= gold)
+        if (playingPlayer.gold >= gold)
         {
-            this.gold -= gold;
-            SaveData();
+            playingPlayer.gold -= gold;
+            SaveData(selectedPlayer);
             return true;
         }
         
@@ -70,38 +102,38 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseTotalHP(int addHp)
     {
-        totalHp += addHp;
-        SaveData();
+        playingPlayer.totalHp += addHp;
+        SaveData(selectedPlayer);
     }
 
     public void IncreaseCurHp(int addHp)
     {
-        curHp += addHp;
-        SaveData();
+        playingPlayer.curHp += addHp;
+        SaveData(selectedPlayer);
     }
 
     public void IncreaseAtk(int addatk)
     {
-        atk += addatk;
-        SaveData();
+        playingPlayer.atk += addatk;
+        SaveData(selectedPlayer);
     }
 
     public void IncreaseDef(int adddef)
     {
-        def += adddef;
-        SaveData();
+        playingPlayer.def += adddef;
+        SaveData(selectedPlayer);
     }
 
     public void SetCurrentHP(int hp)
     {
-        curHp += hp;
+        playingPlayer.curHp += hp;
 
-        if (curHp > totalHp)
-            curHp = totalHp;
+        if (playingPlayer.curHp > playingPlayer.totalHp)
+            playingPlayer.curHp = playingPlayer.totalHp;
 
-        if (curHp < 0)
-            curHp = 0;
-        SaveData();
+        if (playingPlayer.curHp < 0)
+            playingPlayer.curHp = 0;
+        SaveData(selectedPlayer);
         //curHp = Mathf.Clamp(curHp, 0, 100);   <= 위 기능들을 한번에 묶어버리는 유니티 전용 함수.
     }
 

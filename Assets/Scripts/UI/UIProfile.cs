@@ -48,17 +48,18 @@ public class UIProfile : MonoBehaviour
     public void RefreshState()
     {
         var instance = GameManager.GetInstance();
-        txtLevel.text = $"Lv : {instance.level}";
-        txtName.text = $"{instance.playerName}";
-        txtGold.text = $"{instance.gold} G";
+        var player = instance.playingPlayer;
+        txtLevel.text = $"Lv : {player.level}";
+        txtName.text = $"{player.playerName}";
+        txtGold.text = $"{player.gold} G";
 
         
-        hpBar.maxValue = instance.totalHp;
-        hpBar.value = instance.curHp;
+        hpBar.maxValue = player.totalHp;
+        hpBar.value = player.curHp;
 
         curHp.text = $"{hpBar.value}/{hpBar.maxValue}";
-        log.text = $"Atk : {instance.atk}\nDef : {instance.def}";
-        instance.SaveData();
+        log.text = $"Atk : {player.atk}\nDef : {player.def}";
+        instance.SaveData(instance.selectedPlayer);
                
     }
 

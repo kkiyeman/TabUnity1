@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ObjectManager : MonoBehaviour
 {
+
+    public Player playerInfo;
+    public Monster monsterInfo;
     #region SingletoneMake
     public static ObjectManager instance = null;
     public static ObjectManager GetInstance()
@@ -19,18 +22,20 @@ public class ObjectManager : MonoBehaviour
     }
     #endregion
     // Start is called before the first frame update
-public GameObject CreateCharacter()
+public GameObject CreateCharacter(Player player)
     {
-        Object charObj = Resources.Load("Sprite/Player");
+        playerInfo = player;
+        Object charObj = Resources.Load($"Sprite/{playerInfo}");
         GameObject character = (GameObject)Instantiate(charObj);
         
 
         return character;
     }
 
-    public GameObject CreateMonster()
+    public GameObject CreateMonster(Monster rMon)
     {
-        Object monsterObj = Resources.Load("Sprite/Monster1");
+        monsterInfo = rMon;
+        Object monsterObj = Resources.Load($"Sprite/{monsterInfo}");
         GameObject monster = (GameObject)Instantiate(monsterObj);
 
 
@@ -47,9 +52,10 @@ public GameObject CreateCharacter()
         return hEffect.GetComponent<ParticleSystem>();
     }
 
-    public GameObject CreateDeadMonster()
+    public GameObject CreateDeadMonster(Monster rMon)
     {
-        Object monsterObj = Resources.Load("Sprite/DeadMonster1");
+        monsterInfo = rMon;
+        Object monsterObj = Resources.Load($"Sprite/Dead{monsterInfo}");
         GameObject monster = (GameObject)Instantiate(monsterObj);
 
 

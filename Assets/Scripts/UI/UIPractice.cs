@@ -34,7 +34,7 @@ public class UIPractice : MonoBehaviour
     }
     public void OnClickAtkUp()
     {
-        if (GameManager.GetInstance().gold >= 2000)
+        if (GameManager.GetInstance().playingPlayer.gold >= 2000)
         {
             GameManager.GetInstance().IncreaseAtk(2);
             GameManager.GetInstance().SpendGold(2000);
@@ -54,7 +54,7 @@ public class UIPractice : MonoBehaviour
     }
     public void OnClickDefUp()
     {
-        if (GameManager.GetInstance().gold >= 1000)
+        if (GameManager.GetInstance().playingPlayer.gold >= 1000)
         {
             GameManager.GetInstance().IncreaseDef(1);
             GameManager.GetInstance().SpendGold(1000);
@@ -74,7 +74,7 @@ public class UIPractice : MonoBehaviour
     }
     public void OnClickHpUp()
     {
-        if (GameManager.GetInstance().gold >= 3000)
+        if (GameManager.GetInstance().playingPlayer.gold >= 3000)
         {
             GameManager.GetInstance().IncreaseTotalHP(30);
             GameManager.GetInstance().IncreaseCurHp(30);

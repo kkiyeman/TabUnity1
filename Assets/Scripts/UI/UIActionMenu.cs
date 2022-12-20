@@ -14,6 +14,8 @@ public class UIActionMenu : MonoBehaviour
 
     public bool anotherText = false;
     public AudioSource audiosource;
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +44,7 @@ public class UIActionMenu : MonoBehaviour
 
     public void OnClickHeal()
     {
-        if(GameManager.GetInstance().totalHp >GameManager.GetInstance().curHp)
+        if(GameManager.GetInstance().playingPlayer.totalHp > GameManager.GetInstance().playingPlayer.curHp)
         {
             Heal();
         }
@@ -78,7 +80,7 @@ public class UIActionMenu : MonoBehaviour
     }
     private void Heal()
     {
-        GameManager.GetInstance().SetCurrentHP(GameManager.GetInstance().totalHp / 2);
+        GameManager.GetInstance().SetCurrentHP(GameManager.GetInstance().playingPlayer.totalHp / 2);
         GameManager.GetInstance().SpendGold(50);
         var hEffect = ObjectManager.GetInstance().CreateHitEffect("Health_Up_green");
         hEffect.transform.localPosition = new Vector3(0, 1, 0);
@@ -111,8 +113,13 @@ public class UIActionMenu : MonoBehaviour
 
     public void MarchPlayer()
     {
-        var player = GameObject.Find("Player(Clone)").GetComponent<MoveManager>();
-        player.March();
+        GameObject player = GameObject.Find("Player1(Clone)");
+        if(player == null)
+        {
+            player = GameObject.Find("Player2(Clone)");
+        }
+        
+        player.GetComponent<MoveManager>().March();
         
     }
 }
